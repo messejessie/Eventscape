@@ -24,19 +24,14 @@ body {
     max-width: 1230px;
 }
 
-/* jumbotron css */
-
 .jumbotron {
     margin-top: 15px;
 }
 
-/* Searchbar div */
 
 #SearchBarDiv {
     margin:25px 0px;
 }
-
-/* Three column section */
 
 #threeColumnSection {
     margin-bottom:50px;
@@ -44,9 +39,8 @@ body {
 
 
 /* footer */
-footer {
-    background-color: #000;
-    color:#fff
+.footer {
+    background-color: #f5f5f5;
 }
 
 
