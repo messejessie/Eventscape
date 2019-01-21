@@ -30,6 +30,18 @@ body {
     margin-top: 15px;
 }
 
+/* Searchbar div */
+
+#SearchBarDiv {
+    margin:25px 0px;
+}
+
+/* Three column section */
+
+#threeColumnSection {
+    margin-bottom:50px;
+}
+
 
 /* footer */
 footer {
