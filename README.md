@@ -2,23 +2,23 @@
 
 ## Focus
 
-*	Project Title: All About Cannabis
+*	Project Title: All 
 
 *	Team Members: Christian, Jessie, Louis 
 
-*	Project Description: An app that educates about weed and the consumer can learn about cannabis. 
+*	Project Description: To find events around and about orlando
 
 *   Sketch of Final Product:
 
-*   APIs to be Used: Otreeba, Maps
+*   APIs to be Used: Ticket Master, Google Maps
 
-*   Rough Breakdown of Tasks: User being able to search for retail locations studies, and research products and what they do, images, and origin. 
+*   Rough Breakdown of Tasks: User being able to search for event locations
 
 * Target: Everyone 
 
 ## API Keys: 
 
-* Maps: https://maps.googleapis.com/maps/api/js?key=AIzaSyA2cmM1iwAU70hxBhGrvOZMDFmUz4fMzB8&libraries=places&callback=initAutocomplete"
+* Maps: https://developers.google.com/maps/documentation/javascript/examples/places-searchbox"
 
-* Otreeba: 
+* 
 
