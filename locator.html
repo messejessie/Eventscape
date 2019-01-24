@@ -68,6 +68,48 @@
                 mapTypeId: 'roadmap'
             });
             var infowindow = new google.maps.InfoWindow();
+            // Try HTML5 geolocation.
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function(position) {
+            //         var pos = {
+            //             lat: position.coords.latitude,
+            //             lng: position.coords.longitude
+            //         };
+            //         // infowindow.setPosition(pos);
+            //         // infowindow.setContent('Location found.');
+            //         infowindow.open(map);
+            //         map.setCenter(pos);
+            //     }, function() {
+            //         getIpLocation();
+            //     });
+            // } else {
+            //     getIpLocation();
+            // }
+            // fallback for when user has no geolocation
+            // function getIpLocation() {
+            //     let userCity = '',
+            //         userLatitude = 0,
+            //         userLongitude = 0;
+            //     $.ajax('https://ipapi.co/json/').then(function success(response) {
+            //         userCity = response.city;
+            //         userLatitude = response.latitude;
+            //         userLongitude = response.longitude;
+            //         console.log('User\'s City is: ', userCity);
+            //         console.log('User\'s Latitude is: ', userLatitude);
+            //         console.log('User\'s Longitude is: ', Number(userLongitude));
+            //     }, function fail(data, status) {
+            //         console.log('Request failed.  Returned status of', status);
+            //     });
+            //     var ipPos = {
+            //         lat: userLatitude,
+            //         lng: userLongitude
+            //     };
+            //     new google.maps.LatLng(userLatitude, userLongitude);
+            //     // infowindow.setPosition(ipPos);
+            //     // infowindow.setContent('Location found.');
+            //     infowindow.open(map);
+            //     map.setCenter(ipPos);
+            // }
             // Create the search box and link it to the UI element.
             var input = document.getElementById('pac-input');
             var searchBox = new google.maps.places.SearchBox(input);
@@ -131,6 +173,7 @@
                     google.maps.event.trigger(input, 'focus', {});
                     google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
                     google.maps.event.trigger(this, 'focus', {});
+                    $('#pac-input').val("");
                 }
             }, 10);
         });

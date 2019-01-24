@@ -1,32 +1,21 @@
-let eventName
+let eventName,
     eventImage,
     eventDate,
     eventVenue,
-    eventLocation;
+    eventLocation,
+    currentLimit = 0,
+    lastQuery = '';
 
-$(function() {
-    $.ajax('https://app.ticketmaster.com/discovery/v2/events.json?apikey=pQgTyt588rDeOndWRv1VOdqoH9kF76HN&city=Orlando')
-    .then(function success(response) {
-        //console.log(response);
-        let events = response._embedded.events;
-        console.log(events);
-
-    }, function fail(data, status) {
-            console.log('Request failed.  Returned status of', status);
-        }
-    );
-});
-
-function displayEvents(query, showMore) {
-    let hero = query,
-        api_key = "2waeg1EgKzge3SHpASXilZ93joi92FC2",
+function displayEvents(city, keyword, showMore) {
+    let query = keyword || "music",
+        apiKey = "pQgTyt588rDeOndWRv1VOdqoH9kF76HN",
         // offset = Math.floor(Math.random() * 25),
         offset = 0,
-        limit = showMore == true ? currentLimit + 10 : 10,
-        queryURL = "https://api.giphy.com/v1/gifs/search?q=" + hero + "&api_key=" + api_key + "&offset=" + offset + "&limit=" + limit;
+        limit = showMore == true ? currentLimit + 12 : 12,
+        queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&keyword=" + query + "&city=" + city + "&size=" + limit;
+        //queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pQgTyt588rDeOndWRv1VOdqoH9kF76HN&keyword=music&city=Orlando&size=10";
 
-        currentLimit = lastQuery != query ? 0 : currentLimit,
-
+    currentLimit = lastQuery != query ? 0 : currentLimit,
     lastQuery = query;
 
     $.ajax({
@@ -34,42 +23,45 @@ function displayEvents(query, showMore) {
         method: "GET"
     })
     .done(function(results) {
-        let data = results.data;
-        let gifDiv = '';
-        console.log(data);
-        for (var i = 0 + currentLimit; i < data.length; i++) {
-            let { id, title, rating, embed_url, images: {fixed_width_still, fixed_width} } = data[i];
-            gifDiv += `
+        console.log(results);
+        let events = results._embedded.events,
+            eventDiv = '';
+        console.log(events);
+        for (var i = 0 + currentLimit; i < events.length; i++) {
+            let name = events[i].name,
+                image = events[i].images[4].url,
+                date = events[i].dates.start.localDate,
+                venue = events[i]._embedded.venues[0].name,
+                address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode;
+
+                // console.log(name);
+                // console.log(image);
+                // console.log(date);
+                // console.log(venue);
+                // console.log(address);
+                // console.log('---------------');
+
+            eventDiv += `
                     <div class="card border-0">
-                        <img class="card-img-top gif" src="${fixed_width_still.url}" data-paused="${fixed_width_still.url}"  data-play="${fixed_width.url}" data-state="paused">
+                        <img class="card-img-top" src="${image}">
                         <div class="card-body">
-                `;
-            if (liked.indexOf(id) > -1) {
-                gifDiv += `<a href="#" class="fave-icon liked float-right" data-id="${id}"></a>`;
-            }
-            else {
-                gifDiv += `<a href="#" class="fave-icon float-right" data-id="${id}"></a>`;
-            }
-            gifDiv += `
-                            <p class="card-text">Rating: <span class="rating-value">${rating}</span></p>
-                            <p class="card-text">Title:<br>${title}</p>
-                            <p class="card-text">Embed URL:<br><a class="embed-url" href="${embed_url}" target="_blank">${embed_url}</a></p>
+                            <p class="card-text">${name}</p>
+                            <p class="card-text">Venue:<br>${venue}</p>
                         </div>
                     </div>
                 `;
         }
 
-        // setting current limit to the number of gifs displayed
+        // setting current limit to the number of events displayed
         currentLimit  = limit;
 
         if (!showMore) {
-            $("#gifs-container").empty().append(gifDiv);
+            $("#events-container").empty().append(eventDiv);
         }
         else {
-            $("#gifs-container").append(gifDiv);
+            $("#events-container").append(eventDiv);
         }
         $("#show-more").show();
-        $("#show-more button").attr('data-name', lastQuery);
     })
     .fail(function(err) {
         throw err;
@@ -77,15 +69,14 @@ function displayEvents(query, showMore) {
 }
 
 // trigger to display the gifs
-$('#buttons-container').on('click', 'button', function() {
+$('#searchForm').on('click', 'button' , function() {
     event.preventDefault();
-    let query = $(this).attr("data-name");
-    $("#buttons-container button").removeAttr("disabled");
-    $(this).attr("disabled", "disabled");
-    displayEvents(query);
+    let city = $("#cityInput").val();
+    displayEvents(city);
 });
 $('#show-more').on('click', 'button', function() {
     event.preventDefault();
-    let query = $(this).attr("data-name");
-    displayEvents(query, true);
+    let city = $("#cityInput").val();
+        city = "orlando";
+    displayEvents(city, null, true);
 });
