@@ -6,16 +6,23 @@ html {
     position: relative;
 }
 body {
+    padding-bottom: 100px;
     font-family: 'Open Sans', 'Trebuchet MS', Verdana, Arial, Helvetica, sans-serif;
     text-rendering: optimizeLegibility;
     color: #444;
-    background-color: #fff;
+    /* background-color: #fff; */
     /* background: linear-gradient(45deg, #23A6D5, #23D5AB); */
     /* background-image: linear-gradient(to right top, #164ea2, #0081d1, #00aec3, #00d37f, #a8eb12); */
+    background-image: linear-gradient(45deg, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
     background-size: cover;
     background-position: 50% 50%;
     background-attachment: fixed;
     overflow-y: scroll;
+    height: 100% !important;
+}
+
+.row-margin {
+    margin: 20px 0;
 }
 .container {
     max-width: 1200px;
@@ -24,29 +31,58 @@ body {
     max-width: 1230px;
 }
 
-/* jumbotron css */
-
 .jumbotron {
     margin-top: 15px;
 }
-
-/* Searchbar div */
-
 #SearchBarDiv {
-    margin:25px 0px;
+    margin-top: 25px;
+    margin-bottom: 25px;
 }
-
-/* Three column section */
 
 #threeColumnSection {
     margin-bottom:50px;
 }
+#show-more {
+    display: none;
+    margin-bottom: 30px;
+    padding-top: 30px;
+    border-top: 1px dotted #ccc;
+}
+#show-more button {
+    min-width: 250px;
+}
 
+/*------ google maps ------*/
+#map {
+    height: 100%;
+    min-height: 650px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
+#map .form-control {
+    width: calc(100% - 215px - 60px);
+    margin-top: 10px;
+}
+.initial-input {
+    display: none;
+}
+.card-deck .card {
+    flex: 1 0 100%;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    max-width: calc(100% - 30px);
+}
 
 /* footer */
-footer {
-    background-color: #000;
-    color:#fff
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f5f5f5;
 }
 
 
@@ -57,11 +93,20 @@ footer {
 
 }
 @media (min-width: 768px) {
+    .card-deck .card {
+        max-width: calc(50% - 30px);
+    }
 
 }
 @media (min-width: 992px) {
+    .card-deck .card {
+        max-width: calc(33.333333% - 30px);
+    }
 
 }
 @media (min-width: 1200px) {
+    .card-deck .card {
+        max-width: calc(25% - 30px);
+    }
 
 }
