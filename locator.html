@@ -16,142 +16,125 @@
 
 <body>
 
-<!-- ============= naviagation section  ============== -->
-<!-- Articles, products [extracts, edibles, etc] , locator page, locator search bar -->
+    <!-- ============= naviagation section  ============== -->
+    <!-- Articles, products [extracts, edibles, etc] , locator page, locator search bar -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">All About Cannabis</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Studies</a></li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Products</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="products.html">Products</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="extracts.html">Extracts</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="edibles.html">Edibles</a>
-                </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="store-locator.html">Store Locator</a></li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container">
-    <!-- <div class="row justify-content-center" id="SearchBarDiv">
-        <div class="col-12 col-md-10 col-lg-8">
-            <form class="card card-sm">
-                <div class="card-body row no-gutters align-items-center">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="pac-input" placeholder="Search...">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Eventscape</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="locator.html">Event Locator</a></li>
+            </ul>
         </div>
-    </div> -->
-    <div class="row">
-        <input type="text" class="form-control" id="pac-input" placeholder="Search...">
-        <div id="map" class="col-12">
-            <!-- this is where the map will show up -->
-        </div>
-    </div>
-</div><!-- end of the container -->
+    </nav>
 
-<footer class="footer mt-auto py-3 text-center">
     <div class="container">
-        <span class="text-muted">Place sticky footer content here.</span>
-    </div>
-</footer>
+        <div class="row">
+            <div class="initial-input">
+                <input type="text" class="form-control" id="pac-input" placeholder="Search...">
+            </div>
+            <div id="map" class="col-12">
+                <!-- this is where the map will show up -->
+            </div>
+        </div>
+    </div><!-- end of the container -->
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
+    <footer class="footer mt-auto py-3 text-center">
+        <div class="container">
+            <span class="text-muted">Presented by Jess, Louis, and Christian</span>
+        </div>
+    </footer>
 
-<script>
-  function initAutocomplete() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 28.5383, lng: -81.3792}, // orlando
-      zoom: 13,
-      mapTypeId: 'roadmap'
-    });
-    var infowindow = new google.maps.InfoWindow();
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
-    // Create the search box and link it to the UI element.
-    var input = document.getElementById('pac-input');
-    var searchBox = new google.maps.places.SearchBox(input);
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-    // Bias the SearchBox results towards current map's viewport.
-    map.addListener('bounds_changed', function() {
-      searchBox.setBounds(map.getBounds());
-    });
-
-    var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
-    searchBox.addListener('places_changed', function() {
-      var places = searchBox.getPlaces();
-
-      if (places.length == 0) {
-        return;
-      }
-
-      // Clear out the old markers.
-      markers.forEach(function(marker) {
-        marker.setMap(null);
-      });
-      markers = [];
-
-      // For each place, get the icon, name and location.
-      var bounds = new google.maps.LatLngBounds();
-      // var infowindow = new google.maps.InfoWindow();
-      places.forEach(function(place) {
-        if (!place.geometry) {
-          console.log("Returned place contains no geometry");
-          return;
+    <script>
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 28.5383,
+                    lng: -81.3792
+                }, // orlando
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
+            var infowindow = new google.maps.InfoWindow();
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+                if (places.length == 0) {
+                    return;
+                }
+                // Clear out the old markers.
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+                    markers.push(marker);
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</div>');
+                        infowindow.open(map, this);
+                    });
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
         }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2cmM1iwAU70hxBhGrvOZMDFmUz4fMzB8&libraries=places&callback=initAutocomplete" async defer></script>
 
-        var marker = new google.maps.Marker({
-          map: map,
-          title: place.name,
-          position: place.geometry.location
+    <script>
+        $(function() {
+            // this automatically run a goole map search when map is ready
+            var googleLoaded = setInterval(function() {
+                // console.log("running check...")
+                if (/loaded|complete/.test(document.readyState)) { // check if everything in the page is loaded and I mean everything
+                    clearInterval(googleLoaded);
+                    $('#pac-input').val("events near me");
+                    var input = document.getElementById('pac-input');
+                    google.maps.event.trigger(input, 'focus', {});
+                    google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
+                    google.maps.event.trigger(this, 'focus', {});
+                }
+            }, 10);
         });
-
-        markers.push(marker);
-
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-            place.formatted_address + '</div>');
-          infowindow.open(map, this);
-        });
-
-        if (place.geometry.viewport) {
-          // Only geocodes have viewport.
-          bounds.union(place.geometry.viewport);
-        } else {
-          bounds.extend(place.geometry.location);
-        }
-      });
-      map.fitBounds(bounds);
-    });
-  }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2cmM1iwAU70hxBhGrvOZMDFmUz4fMzB8&libraries=places&callback=initAutocomplete" async defer></script>
-
-<script src="assets/javascript/app.js"></script>
+    </script>
 
 </body>
-
 </html>
