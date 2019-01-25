@@ -56,6 +56,7 @@ function displayEvents(city, keyword, showMore) {
                             <p class="card-text">${name}</p>
                             <p class="card-text">Venue:<br>${venue}</p>
                         </div>
+
                         <div class="card-footer">
                             <p class="card-text text-center"><a class="btn btn-outline-primary btn-sm" href="locator.html?venue=${urlVenue}">Venue Spot</a></p>
                         </div>

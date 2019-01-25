@@ -18,7 +18,7 @@
 <body>
 
     <!-- ============= naviagation section  ============== -->
-    <!-- Articles, products [extracts, edibles, etc] , locator page, locator search bar -->
+    <!-- locator search bar -->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Eventscape</a>
@@ -60,6 +60,17 @@
             </div>
         </div>
     </div>
+
+
+<!-- footer -->
+    <footer class="footer mt-auto py-3 text-center">
+        <div class="container">
+            <span class="text-muted">Presented by Jess, Louis, and Christian</span>
+        </div>
+    </footer>
+
+
+
     <footer class="footer mt-auto py-3 text-center">
         <div class="container">
             <span class="text-muted">Presented by Jess, Louis, and Christian</span>
@@ -109,6 +120,35 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAe3aF_3HEoqxNqsYipJunwRyE9U12TkGI",
+            authDomain: "project1-5bbc7.firebaseapp.com",
+            databaseURL: "https://project1-5bbc7.firebaseio.com",
+            projectId: "project1-5bbc7",
+            storageBucket: "project1-5bbc7.appspot.com",
+            messagingSenderId: "383631456222"
+        };
+        firebase.initializeApp(config);
+
+        var database = firebase.database();
+        // adding email and city
+        $('#find-events').on('click', function (event) {
+            event.preventDefault();
+
+            //user input 
+            var userEmail = $('#email').val().trim();
+            var userCity = $('#city').val().trim();
+
+            //database stuff
+            var newUser = {
+
+                userEmail: userEmail,
+                userCity: userCity
+
 
         <!--Firebase-->
         <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
@@ -155,20 +195,19 @@
 
                 console.log(localStorage)
             });
-        </script>
-        <script src="assets/javascript/app.js"></script>
-        <script>
-            if (!localStorage.getItem('popupShown')) {
-                // display popup
+  </script>
+            <script src="assets/javascript/app.js"></script>
+    <script>
+        if (!localStorage.getItem('popupShown')) {
+            // display popup
 
-                $('#myModal').modal('show', function () {
-                    $('#myInput').trigger('focus')
+            $('#myModal').modal('show', function () {
+                $('#myInput').trigger('focus')
 
 
-                });
-            };
-        </script>
 
+            });
+        };
+    </script>
 </body>
-
 </html>
