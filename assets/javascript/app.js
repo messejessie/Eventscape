@@ -4,19 +4,25 @@ let eventName,
     eventVenue,
     eventLocation,
     currentLimit = 0,
-    lastQuery = '';
+    lastCity = '';
 
 function displayEvents(city, keyword, showMore) {
+    console.log('currentLimit: ' + currentLimit);
     let query = keyword || "music",
+        queryCity = city,
         apiKey = "pQgTyt588rDeOndWRv1VOdqoH9kF76HN",
-        // offset = Math.floor(Math.random() * 25),
         offset = 0,
         limit = showMore == true ? currentLimit + 12 : 12,
-        queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&keyword=" + query + "&city=" + city + "&size=" + limit;
+        queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=" + apiKey + "&keyword=" + query + "&city=" + queryCity + "&size=" + limit;
         //queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pQgTyt588rDeOndWRv1VOdqoH9kF76HN&keyword=music&city=Orlando&size=10";
 
-    currentLimit = lastQuery != query ? 0 : currentLimit,
-    lastQuery = query;
+    currentLimit = lastCity != queryCity ? 0 : currentLimit,
+    lastCity = queryCity;
+
+    console.log('limit: ' + limit);
+    console.log('currentLimit: ' + currentLimit);
+    console.log('queryCity: ', queryCity);
+    console.log('lastCity: ', lastCity);
 
     $.ajax({
         url: queryURL,
@@ -32,7 +38,8 @@ function displayEvents(city, keyword, showMore) {
                 image = events[i].images[4].url,
                 date = events[i].dates.start.localDate,
                 venue = events[i]._embedded.venues[0].name,
-                address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode;
+                address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode,
+                urlAddress = address.replace(' ', '%20');
 
                 // console.log(name);
                 // console.log(image);
@@ -53,7 +60,7 @@ function displayEvents(city, keyword, showMore) {
         }
 
         // setting current limit to the number of events displayed
-        currentLimit  = limit;
+        currentLimit = limit;
 
         if (!showMore) {
             $("#events-container").empty().append(eventDiv);
@@ -72,11 +79,12 @@ function displayEvents(city, keyword, showMore) {
 $('#searchForm').on('click', 'button' , function() {
     event.preventDefault();
     let city = $("#cityInput").val();
-    displayEvents(city);
+    if (lastCity != city) {
+        displayEvents(city, null, false);
+    }
 });
 $('#show-more').on('click', 'button', function() {
     event.preventDefault();
     let city = $("#cityInput").val();
-        city = "orlando";
     displayEvents(city, null, true);
 });
