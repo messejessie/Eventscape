@@ -139,73 +139,23 @@
         $('#find-events').on('click', function (event) {
             event.preventDefault();
 
-            //user input 
+            //user input
             var userEmail = $('#email').val().trim();
             var userCity = $('#city').val().trim();
 
             //database stuff
             var newUser = {
-
                 userEmail: userEmail,
                 userCity: userCity
-
-
-        <!--Firebase-->
-        <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyAe3aF_3HEoqxNqsYipJunwRyE9U12TkGI",
-                authDomain: "project1-5bbc7.firebaseapp.com",
-                databaseURL: "https://project1-5bbc7.firebaseio.com",
-                projectId: "project1-5bbc7",
-                storageBucket: "project1-5bbc7.appspot.com",
-                messagingSenderId: "383631456222"
-            };
-            firebase.initializeApp(config);
-
-            var database = firebase.database();
-            // adding email and city
-            $('#find-events').on('click', function (event) {
-                event.preventDefault();
-
-                //user input
-                var userEmail = $('#email').val().trim();
-                var userCity = $('#city').val().trim();
-
-                //database stuff
-                var newUser = {
-
-                    userEmail: userEmail,
-                    userCity: userCity
-
-                };
-
-                //upload to DB
-                database.ref().set(newUser);
-                console.log(userEmail);
-                console.log(userCity);
-
-                //Clear
-                $("#email").val('');
-                $("#city").val('');
-
-                //local storage:
-                localStorage.setItem('popupShown', 'true');
-
-                console.log(localStorage)
-            });
-  </script>
-            <script src="assets/javascript/app.js"></script>
+            }
+        });
+    </script>
+    <script src="assets/javascript/app.js"></script>
     <script>
         if (!localStorage.getItem('popupShown')) {
             // display popup
-
             $('#myModal').modal('show', function () {
                 $('#myInput').trigger('focus')
-
-
-
             });
         };
     </script>
