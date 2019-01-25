@@ -19,6 +19,7 @@ body {
     background-attachment: fixed;
     overflow-y: scroll;
     height: 100% !important;
+
 }
 .container {
     max-width: 1200px;
@@ -30,6 +31,13 @@ body {
 .jumbotron {
     margin-top: 15px;
 }
+
+#SearchBarDiv {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+=======
 
 .venueButton {
     background-color: #000;
@@ -53,6 +61,7 @@ body {
     margin-top: 25px;
     margin-bottom: 25px;
 }
+
 
 #threeColumnSection {
     margin-bottom:50px;
