@@ -30,6 +30,25 @@ body {
 .jumbotron {
     margin-top: 15px;
 }
+
+.venueButton {
+    background-color: #000;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    
+}
+
+.venueButton:hover{
+    background-color: #fff; 
+    color: #000;
+    border: 1px solid #707070;
+
+}
+
 #SearchBarDiv {
     margin-top: 25px;
     margin-bottom: 25px;

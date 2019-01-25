@@ -48,6 +48,10 @@ function displayEvents(city, keyword, showMore) {
                             <p class="card-text">${name}</p>
                             <p class="card-text">Venue:<br>${venue}</p>
                         </div>
+                        <div class="buttonbody"> 
+                        
+                        <a href="locater.html" class="btn btn-sm venueButton">Venue Spot</a>
+                        </div> 
                     </div>
                 `;
         }
