@@ -99,7 +99,11 @@ body {
     width: 100%;
     max-width: calc(100% - 30px);
 }
-
+.card .card-footer {
+    background: transparent;
+    border: 0;
+    padding-bottom: 20px;
+}
 /* footer */
 .footer {
     position: absolute;

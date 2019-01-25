@@ -40,7 +40,7 @@
                 <form id="searchForm" class="card card-sm">
                     <div class="card-body row no-gutters align-items-center">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="cityInput" placeholder="Search topics or keywords...">
+                            <input type="text" class="form-control" id="cityInput" placeholder="Enter City">
                             <div class="input-group-append">
                                 <button id="searhEvent" type="submit" class="btn btn-primary">Search</button>
                             </div>
@@ -70,11 +70,13 @@
     </footer>
 
 
+
     <footer class="footer mt-auto py-3 text-center">
         <div class="container">
             <span class="text-muted">Presented by Jess, Louis, and Christian</span>
         </div>
     </footer>
+
 
     <!--Modal-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -110,6 +112,7 @@
             </div>
         </div>
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -146,30 +149,61 @@
                 userEmail: userEmail,
                 userCity: userCity
 
+
+        <!--Firebase-->
+        <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyAe3aF_3HEoqxNqsYipJunwRyE9U12TkGI",
+                authDomain: "project1-5bbc7.firebaseapp.com",
+                databaseURL: "https://project1-5bbc7.firebaseio.com",
+                projectId: "project1-5bbc7",
+                storageBucket: "project1-5bbc7.appspot.com",
+                messagingSenderId: "383631456222"
             };
+            firebase.initializeApp(config);
 
-            //upload to DB
-            database.ref().set(newUser);
-            console.log(userEmail);
-            console.log(userCity);
+            var database = firebase.database();
+            // adding email and city
+            $('#find-events').on('click', function (event) {
+                event.preventDefault();
 
-            //Clear
-            $("#email").val('');
-            $("#city").val('');
+                //user input
+                var userEmail = $('#email').val().trim();
+                var userCity = $('#city').val().trim();
 
-            //local storage:
-            localStorage.setItem('popupShown', 'true');
+                //database stuff
+                var newUser = {
 
-            console.log(localStorage)
-        });
-    </script>
-    <script src="assets/javascript/app.js"></script>
+                    userEmail: userEmail,
+                    userCity: userCity
+
+                };
+
+                //upload to DB
+                database.ref().set(newUser);
+                console.log(userEmail);
+                console.log(userCity);
+
+                //Clear
+                $("#email").val('');
+                $("#city").val('');
+
+                //local storage:
+                localStorage.setItem('popupShown', 'true');
+
+                console.log(localStorage)
+            });
+  </script>
+            <script src="assets/javascript/app.js"></script>
     <script>
         if (!localStorage.getItem('popupShown')) {
             // display popup
 
             $('#myModal').modal('show', function () {
                 $('#myInput').trigger('focus')
+
 
 
             });
