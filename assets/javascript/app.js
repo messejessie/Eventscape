@@ -39,7 +39,8 @@ function displayEvents(city, keyword, showMore) {
                 date = events[i].dates.start.localDate,
                 venue = events[i]._embedded.venues[0].name,
                 address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode,
-                urlAddress = address.replace(' ', '%20');
+                urlAddress = address.replace(' ', '%20'),
+                urlVenue = venue.replace(' ', '%20');
 
                 // console.log(name);
                 // console.log(image);
@@ -54,6 +55,9 @@ function displayEvents(city, keyword, showMore) {
                         <div class="card-body">
                             <p class="card-text">${name}</p>
                             <p class="card-text">Venue:<br>${venue}</p>
+                        </div>
+                        <div class="card-footer">
+                            <p class="card-text text-center"><a class="btn btn-outline-primary btn-sm" href="locator.html?venue=${urlVenue}">Venue Spot</a></p>
                         </div>
                     </div>
                 `;
