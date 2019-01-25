@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/gif" href="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ============= naviagation section  ============== -->
+    <!-- Articles, products [extracts, edibles, etc] , locator page, locator search bar -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="index.html">Eventscape</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="locator.html">Event Locator</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="initial-input">
+                <input type="text" class="form-control" id="pac-input" placeholder="Search...">
+            </div>
+            <div id="map" class="col-12">
+                <!-- this is where the map will show up -->
+            </div>
+        </div>
+    </div><!-- end of the container -->
+
+    <footer class="footer mt-auto py-3 text-center">
+        <div class="container">
+            <span class="text-muted">Presented by Jess, Louis, and Christian</span>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+    <script>
+        function initAutocomplete() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {
+                    lat: 28.5383,
+                    lng: -81.3792
+                }, // orlando
+                zoom: 13,
+                mapTypeId: 'roadmap'
+            });
+            var infowindow = new google.maps.InfoWindow();
+            // Try HTML5 geolocation.
+            // if (navigator.geolocation) {
+            //     navigator.geolocation.getCurrentPosition(function(position) {
+            //         var pos = {
+            //             lat: position.coords.latitude,
+            //             lng: position.coords.longitude
+            //         };
+            //         // infowindow.setPosition(pos);
+            //         // infowindow.setContent('Location found.');
+            //         infowindow.open(map);
+            //         map.setCenter(pos);
+            //     }, function() {
+            //         getIpLocation();
+            //     });
+            // } else {
+            //     getIpLocation();
+            // }
+            // fallback for when user has no geolocation
+            // function getIpLocation() {
+            //     let userCity = '',
+            //         userLatitude = 0,
+            //         userLongitude = 0;
+            //     $.ajax('https://ipapi.co/json/').then(function success(response) {
+            //         userCity = response.city;
+            //         userLatitude = response.latitude;
+            //         userLongitude = response.longitude;
+            //         console.log('User\'s City is: ', userCity);
+            //         console.log('User\'s Latitude is: ', userLatitude);
+            //         console.log('User\'s Longitude is: ', Number(userLongitude));
+            //     }, function fail(data, status) {
+            //         console.log('Request failed.  Returned status of', status);
+            //     });
+            //     var ipPos = {
+            //         lat: userLatitude,
+            //         lng: userLongitude
+            //     };
+            //     new google.maps.LatLng(userLatitude, userLongitude);
+            //     // infowindow.setPosition(ipPos);
+            //     // infowindow.setContent('Location found.');
+            //     infowindow.open(map);
+            //     map.setCenter(ipPos);
+            // }
+            // Create the search box and link it to the UI element.
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function() {
+                searchBox.setBounds(map.getBounds());
+            });
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function() {
+                var places = searchBox.getPlaces();
+                if (places.length == 0) {
+                    return;
+                }
+                // Clear out the old markers.
+                markers.forEach(function(marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function(place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+                    markers.push(marker);
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + place.formatted_address + '</div>');
+                        infowindow.open(map, this);
+                    });
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2cmM1iwAU70hxBhGrvOZMDFmUz4fMzB8&libraries=places&callback=initAutocomplete" async defer></script>
+
+    <script>
+        $(function() {
+            // this automatically run a goole map search when map is ready
+            var googleLoaded = setInterval(function() {
+                // console.log("running check...")
+                if (/loaded|complete/.test(document.readyState)) { // check if everything in the page is loaded and I mean everything
+                    clearInterval(googleLoaded);
+                    $('#pac-input').val("events near me");
+                    var input = document.getElementById('pac-input');
+                    google.maps.event.trigger(input, 'focus', {});
+                    google.maps.event.trigger(input, 'keydown', { keyCode: 13 });
+                    google.maps.event.trigger(this, 'focus', {});
+                    $('#pac-input').val("");
+                }
+            }, 10);
+        });
+    </script>
+
+</body>
+</html>
