@@ -54,9 +54,9 @@
                 <div id="events-main">
                     <div id="sorting-control" class="text-center">
                         <input class="search form-control mb-2 ml-sm-1 mr-sm-1" placeholder="Search Events" />
-                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="name">Sort by Name</button>
-                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="date">Sort by Date</button>
-                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="venue">Sort by Venue</button>
+                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="name">Sort by Name</button>
+                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="date">Sort by Date</button>
+                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="venue">Sort by Venue</button>
                     </div>
                     <div id="events-container" class="card-deck justify-content-center list">
                         <!-- This is where all the gifs will be rendered -->
@@ -165,15 +165,15 @@
                 $('#myModal').modal('hide');
                 database.ref().push(newUser);
                 displayEvents(userCity, null, false);
-                localStorage.setItem('popupShown', 'true');
-                localStorage.setItem('currentCity', userCity);
+                sessionStorage.setItem('popupShown', 'true');
+                sessionStorage.setItem('currentCity', userCity);
             }
         });
     </script>
     <script src="assets/javascript/list.min.js"></script>
     <script src="assets/javascript/app.js"></script>
     <script>
-        if (!localStorage.getItem('popupShown')) {
+        if (!sessionStorage.getItem('popupShown')) {
             // display popup
             $('#myModal').modal('show', function () {
                 $('#myInput').trigger('focus');

@@ -40,7 +40,7 @@ function displayEvents(city, keyword, showMore) {
                     date = events[i].dates.start.localDate,
                     venue = events[i]._embedded.venues[0].name,
                     address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode,
-                    urlAddress = address.replace(' ', '%20'),
+                    urlAddress = address.replace(' ', '%20') + '%20' + address.replace(' ', '%20'),
                     urlVenue = venue.replace(' ', '%20');
 
                     // console.log(name);
@@ -69,7 +69,7 @@ function displayEvents(city, keyword, showMore) {
             currentLimit = limit;
             lastCity = queryCity;
 
-            localStorage.setItem('currentCity', lastCity);
+            sessionStorage.setItem('currentCity', lastCity);
 
             if (!showMore) {
                 $("#events-container").empty().append(eventDiv);
@@ -96,8 +96,8 @@ function displayEvents(city, keyword, showMore) {
     });
 }
 
-if (localStorage.getItem('currentCity') && localStorage.getItem('popupShown')) {
-    displayEvents(localStorage.getItem('currentCity'), null, false);
+if (sessionStorage.getItem('currentCity') && sessionStorage.getItem('popupShown')) {
+    displayEvents(sessionStorage.getItem('currentCity'), null, false);
 }
 
 // trigger to display the gifs
@@ -111,8 +111,8 @@ $('#searchForm').on('click', 'button' , function() {
 $('#show-more').on('click', 'button', function() {
     event.preventDefault();
     let city = $("#cityInput").val();
-    if (localStorage.getItem('currentCity') && localStorage.getItem('popupShown')) {
-        displayEvents(localStorage.getItem('currentCity'), null, true);
+    if (sessionStorage.getItem('currentCity') && sessionStorage.getItem('popupShown')) {
+        displayEvents(sessionStorage.getItem('currentCity'), null, true);
     }
     else {
         displayEvents(city, null, true);
