@@ -107,7 +107,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="find-events" data-dismiss="modal">Find</button>
+                    <button type="submit" class="btn btn-secondary" id="find-events" data-dismiss="modal">Find</button>
                 </div>
             </div>
         </div>
@@ -148,6 +148,17 @@
                 userEmail: userEmail,
                 userCity: userCity
             }
+           
+            var x = $('#email').val();
+                var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!re.test(x)){
+                    message = "bullshit"
+                } else {
+                    $('#myModal').modal('hide');
+                };
+
+            localStorage.setItem('popupShown', 'true');
+
         });
     </script>
     <script src="assets/javascript/app.js"></script>
@@ -156,6 +167,14 @@
             // display popup
             $('#myModal').modal('show', function () {
                 $('#myInput').trigger('focus')
+
+                // var x = $('#email').val();
+                // var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                // if (!re.test(x)){
+                //     message = "this is not a valid"
+                // } else {
+                //     $('#myModal').modal('hide');
+                // };
             });
         };
     </script>
