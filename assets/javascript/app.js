@@ -118,3 +118,5 @@ $('#show-more').on('click', 'button', function() {
         displayEvents(city, null, true);
     }
 });
+
+
