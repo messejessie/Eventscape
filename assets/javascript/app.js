@@ -9,7 +9,7 @@ let eventName,
 function displayEvents(city, keyword, showMore) {
     console.log('currentLimit: ' + currentLimit);
     let query = keyword || "music",
-        queryCity = city,
+        queryCity = city.toLowerCase(),
         apiKey = "pQgTyt588rDeOndWRv1VOdqoH9kF76HN",
         offset = 0,
         limit = showMore == true ? currentLimit + 12 : 12,
@@ -30,50 +30,66 @@ function displayEvents(city, keyword, showMore) {
     })
     .done(function(results) {
         console.log(results);
-        let events = results._embedded.events,
+        let events = results._embedded != undefined ? results._embedded.events : null,
             eventDiv = '';
         console.log(events);
-        for (var i = 0 + currentLimit; i < events.length; i++) {
-            let name = events[i].name,
-                image = events[i].images[4].url,
-                date = events[i].dates.start.localDate,
-                venue = events[i]._embedded.venues[0].name,
-                address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode,
-                urlAddress = address.replace(' ', '%20'),
-                urlVenue = venue.replace(' ', '%20');
+        if (events != null) {
+            for (var i = 0 + currentLimit; i < events.length; i++) {
+                let name = events[i].name,
+                    ticketUrl = events[i].url,
+                    image = events[i].images[4].url,
+                    date = events[i].dates.start.localDate,
+                    venue = events[i]._embedded.venues[0].name,
+                    address = events[i]._embedded.venues[0].address.line1 + " " + events[i]._embedded.venues[0].city.name + " " + events[i]._embedded.venues[0].state.name + " " + events[i]._embedded.venues[0].postalCode,
+                    urlAddress = address.replace(' ', '%20'),
+                    urlVenue = venue.replace(' ', '%20');
 
-                // console.log(name);
-                // console.log(image);
-                // console.log(date);
-                // console.log(venue);
-                // console.log(address);
-                // console.log('---------------');
+                    // console.log(name);
+                    // console.log(image);
+                    // console.log(date);
+                    // console.log(venue);
+                    // console.log(address);
+                    // console.log('---------------');
 
-            eventDiv += `
-                    <div class="card border-0">
-                        <img class="card-img-top" src="${image}">
-                        <div class="card-body">
-                            <p class="card-text">${name}</p>
-                            <p class="card-text">Venue:<br>${venue}</p>
+                eventDiv += `
+                        <div class="card border-0">
+                            <img class="card-img-top" src="${image}">
+                            <div class="card-body">
+                                <p class="name"><strong>${name}</strong></p>
+                                <span class="date">${date}</span><br>
+                                <span class="venue text-muted">${venue}</span><br>
+                            </div>
+                            <div class="card-footer">
+                                <span class="get-ticket float-left"><a href="${ticketUrl}" target="_blank" rel="noopener noreferrer">Get Tickets</a></span>
+                                <p class="card-text text-right"><a class="btn btn-outline-primary btn-sm" href="locator.html?venue=${urlVenue}">Venue Spot</a></p>
+                            </div>
                         </div>
+                    `;
+            }
+            // setting current limit to the number of events displayed
+            currentLimit = limit;
 
-                        <div class="card-footer">
-                            <p class="card-text text-center"><a class="btn btn-outline-primary btn-sm" href="locator.html?venue=${urlVenue}">Venue Spot</a></p>
-                        </div>
-                    </div>
-                `;
-        }
+            if (!showMore) {
+                $("#events-container").empty().append(eventDiv);
+            }
+            else {
+                $("#events-container").append(eventDiv);
+            }
+            $("#show-more").show();
 
-        // setting current limit to the number of events displayed
-        currentLimit = limit;
+            // sorting function init
+            // setTimeout(function() {
+                var options = {
+        			valueNames: [ 'name', 'date', 'venue' ],
+        		};
+        		var eventList = new List('events-main', options);
+            // }, 1500);
 
-        if (!showMore) {
-            $("#events-container").empty().append(eventDiv);
+        } else {
+            console.log('not a city');
+            $("#events-container").empty().append("Are you sure you entered the correct city?");
+            $("#show-more").hide();
         }
-        else {
-            $("#events-container").append(eventDiv);
-        }
-        $("#show-more").show();
     })
     .fail(function(err) {
         throw err;
@@ -83,7 +99,7 @@ function displayEvents(city, keyword, showMore) {
 // trigger to display the gifs
 $('#searchForm').on('click', 'button' , function() {
     event.preventDefault();
-    let city = $("#cityInput").val();
+    let city = ($("#cityInput").val()).toLowerCase();
     if (lastCity != city) {
         displayEvents(city, null, false);
     }
