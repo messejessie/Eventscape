@@ -96,19 +96,19 @@
             //         userLongitude = response.longitude;
             //         console.log('User\'s City is: ', userCity);
             //         console.log('User\'s Latitude is: ', userLatitude);
-            //         console.log('User\'s Longitude is: ', Number(userLongitude));
+            //         console.log('User\'s Longitude is: ', userLongitude);
+            //         var ipPos = {
+            //             lat: userLatitude,
+            //             lng: userLongitude
+            //         };
+            //         new google.maps.LatLng(userLatitude, userLongitude);
+            //         // infowindow.setPosition(ipPos);
+            //         // infowindow.setContent('Location found.');
+            //         infowindow.open(map);
+            //         map.setCenter(ipPos);
             //     }, function fail(data, status) {
             //         console.log('Request failed.  Returned status of', status);
             //     });
-            //     var ipPos = {
-            //         lat: userLatitude,
-            //         lng: userLongitude
-            //     };
-            //     new google.maps.LatLng(userLatitude, userLongitude);
-            //     // infowindow.setPosition(ipPos);
-            //     // infowindow.setContent('Location found.');
-            //     infowindow.open(map);
-            //     map.setCenter(ipPos);
             // }
             // Create the search box and link it to the UI element.
             var input = document.getElementById('pac-input');
@@ -162,13 +162,23 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA2cmM1iwAU70hxBhGrvOZMDFmUz4fMzB8&libraries=places&callback=initAutocomplete" async defer></script>
 
     <script>
+        function getQueryString(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
         $(function() {
             // this automatically run a goole map search when map is ready
             var googleLoaded = setInterval(function() {
                 // console.log("running check...")
                 if (/loaded|complete/.test(document.readyState)) { // check if everything in the page is loaded and I mean everything
                     clearInterval(googleLoaded);
-                    $('#pac-input').val("events near me");
+                    let mapLocation = getQueryString('venue');
+                    $('#pac-input').val(mapLocation);
                     var input = document.getElementById('pac-input');
                     google.maps.event.trigger(input, 'focus', {});
                     google.maps.event.trigger(input, 'keydown', { keyCode: 13 });

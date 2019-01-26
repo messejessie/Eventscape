@@ -19,7 +19,6 @@ body {
     background-attachment: fixed; 
     overflow-y: scroll;
     height: 100% !important;
-
 }
 
 .navbar-brand {
@@ -49,43 +48,18 @@ body {
     max-width: 1230px;
 }
 
-.jumbotron {
-    margin-top: 15px;
-}
-
 #SearchBarDiv {
     margin-top: 25px;
+    margin-bottom: 15px;
+}
+#sorting-control {
     margin-bottom: 25px;
 }
-
-
-.venueButton {
-    background-color: #000;
-    border-radius: 10px;
-    color: #fff;
-    padding: 10px;
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 30px;
-    
+#sorting-control input, #sorting-control button {
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.venueButton:hover{
-    background-color: #fff; 
-    color: #000;
-    border: 1px solid #707070;
-
-}
-
-#SearchBarDiv {
-    margin-top: 55px;
-    margin-bottom: 25px;
-}
-
-
-#threeColumnSection {
-    margin-bottom:50px;
-}
 #show-more {
     display: none;
     margin-bottom: 30px;
@@ -150,7 +124,14 @@ position: absolute;
     width: 100%;
     max-width: calc(100% - 30px);
 }
-
+.card .card-footer {
+    background: transparent;
+    /* border: 0; */
+    /* padding-bottom: 20px; */
+}
+.get-ticket {
+    padding-top: 3px;
+}
 /* footer */
 .footer {
     position: absolute;
@@ -174,6 +155,9 @@ position: absolute;
     Page Media Queries
 ----------------------------------------------------------------------------- */
 @media (min-width: 576px) {
+    #sorting-control input {
+        max-width: 300px;
+    }
 
 }
 @media (min-width: 768px) {
