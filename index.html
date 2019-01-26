@@ -166,6 +166,7 @@
                 database.ref().push(newUser);
                 displayEvents(userCity, null, false);
                 localStorage.setItem('popupShown', 'true');
+                localStorage.setItem('currentCity', userCity);
             }
         });
     </script>

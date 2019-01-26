@@ -17,7 +17,6 @@ function displayEvents(city, keyword, showMore) {
         //queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?apikey=pQgTyt588rDeOndWRv1VOdqoH9kF76HN&keyword=music&city=Orlando&size=10";
 
     currentLimit = lastCity != queryCity ? 0 : currentLimit,
-    lastCity = queryCity;
 
     console.log('limit: ' + limit);
     console.log('currentLimit: ' + currentLimit);
@@ -68,6 +67,9 @@ function displayEvents(city, keyword, showMore) {
             }
             // setting current limit to the number of events displayed
             currentLimit = limit;
+            lastCity = queryCity;
+
+            localStorage.setItem('currentCity', lastCity);
 
             if (!showMore) {
                 $("#events-container").empty().append(eventDiv);
@@ -78,12 +80,10 @@ function displayEvents(city, keyword, showMore) {
             $("#show-more").show();
 
             // sorting function init
-            // setTimeout(function() {
-                var options = {
-        			valueNames: [ 'name', 'date', 'venue' ],
-        		};
-        		var eventList = new List('events-main', options);
-            // }, 1500);
+            var options = {
+    			valueNames: [ 'name', 'date', 'venue' ],
+    		};
+    		var eventList = new List('events-main', options);
 
         } else {
             console.log('not a city');
@@ -94,6 +94,10 @@ function displayEvents(city, keyword, showMore) {
     .fail(function(err) {
         throw err;
     });
+}
+
+if (localStorage.getItem('currentCity') && localStorage.getItem('popupShown')) {
+    displayEvents(localStorage.getItem('currentCity'), null, false);
 }
 
 // trigger to display the gifs
@@ -107,5 +111,10 @@ $('#searchForm').on('click', 'button' , function() {
 $('#show-more').on('click', 'button', function() {
     event.preventDefault();
     let city = $("#cityInput").val();
-    displayEvents(city, null, true);
+    if (localStorage.getItem('currentCity') && localStorage.getItem('popupShown')) {
+        displayEvents(localStorage.getItem('currentCity'), null, true);
+    }
+    else {
+        displayEvents(city, null, true);
+    }
 });
