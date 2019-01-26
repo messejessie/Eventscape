@@ -11,12 +11,12 @@ body {
     text-rendering: optimizeLegibility;
     color: #444;
     background-color: #000;
-    background: linear-gradient(45deg, #23A6D5, #23D5AB); 
+    background: linear-gradient(45deg, #23A6D5, #23D5AB);
     background-image: linear-gradient(to right top, #164ea2, #0081d1, #00aec3, #00d37f, #a8eb12);
     background-image: linear-gradient(45deg, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
     background-size: cover;
     background-position: 50% 50%;
-    background-attachment: fixed; 
+    background-attachment: fixed;
     overflow-y: scroll;
     height: 100% !important;
 }
@@ -24,22 +24,20 @@ body {
 .navbar-brand {
     font-size: 30px;
     text-transform: capitalize;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
     text-shadow: 1px 1px#000;
 }
 .navbar{
    background-color:transparent!important;
    color:#fff!important;
-   
-}
 
+}
 .navbar li a {
-    font-size:23px; 
+    font-size:23px;
     color:#fff!important;
-    letter-spacing: 6px;
+    letter-spacing: 3px;
     text-shadow: 1px 1px#000;
 }
-
 
 .container {
     max-width: 1200px;
@@ -59,7 +57,6 @@ body {
     display: inline-block;
     vertical-align: middle;
 }
-
 #show-more {
     display: none;
     margin-bottom: 30px;
@@ -69,38 +66,21 @@ body {
 #show-more button {
     min-width: 250px;
 }
-
-
 /* video background */
-
 #myVideo {
 margin-top: -100px;
-position: absolute; 
-  top: 0px; 
-  left: 0px; 
-  min-width: 100%; 
+position: absolute;
+  top: 0px;
+  left: 0px;
+  min-width: 100%;
   min-height: 100%;
-  z-index: -1; 
-
+  z-index: -1;
 }
-
-
 /*------ Search box------*/
-
-
-
 #searhEvent  {
     background-color: #000;
     border: 1px solid #fff;
 }
-
-
-
-
-  
-
-
-
 /*------ google maps ------*/
 #map {
     height: 100%;
@@ -139,7 +119,7 @@ position: absolute;
     left: 0;
     width: 100%;
     background-color: #000;
-    
+
 }
 
 .span {
