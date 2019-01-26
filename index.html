@@ -33,12 +33,12 @@
         </div>
     </nav>
 
- 
+
 
     <!-- search Bar-->
 
     <div class="container-fluid but-fixed">
-    
+
         <div class="row justify-content-center" id="SearchBarDiv">
             <div class="col-12 col-lg-8">
                 <form id="searchForm" class="card card-sm">
@@ -55,15 +55,15 @@
         </div>
 
 
-        
+
         <div class="row justify-content-center">
             <div class="col-12">
                 <div id="events-main">
                     <div id="sorting-control" class="text-center">
                         <input class="search form-control mb-2 ml-sm-1 mr-sm-1" placeholder="Search Events" />
-                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="name">Sort by Name</button>
-                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="date">Sort by Date</button>
-                        <button class="sort btn btn-outline-light mb-2 ml-1 mr-1 " data-sort="venue">Sort by Venue</button>
+                        <button class="sort btn btn-light mb-2 ml-1 mr-1 " data-sort="name">Sort by Name</button>
+                        <button class="sort btn btn-light mb-2 ml-1 mr-1 " data-sort="date">Sort by Date</button>
+                        <button class="sort btn btn-light mb-2 ml-1 mr-1 " data-sort="venue">Sort by Venue</button>
                     </div>
                     <div id="events-container" class="card-deck justify-content-center list">
                         <!-- This is where all the gifs will be rendered -->
@@ -74,14 +74,12 @@
                 <button class="start-btn btn btn-outline-light">Show More!</button>
             </div>
         </div>
-    
-    </div>
-              <video autoplay loop id="myVideo" muted plays-inline>
-                    <source src="assets/videoBackground2.mp4" type="video/mp4">
-                  </video>
-    
- 
 
+    </div>
+
+    <video autoplay loop id="myVideo" muted plays-inline>
+        <source src="assets/videoBackground2.mp4" type="video/mp4">
+    </video>
 
     <!-- footer -->
     <footer class="footer mt-auto py-3 text-center">
@@ -188,7 +186,7 @@
     <script>
         if (!sessionStorage.getItem('popupShown')) {
             // display popup
-            $('#myModal').modal('show', function () {
+            $('#myModal').modal({backdrop: 'static', keyboard: false}, 'show', function () {
                 $('#myInput').trigger('focus');
             });
         };
