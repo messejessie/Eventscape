@@ -84,3 +84,5 @@ $('#show-more').on('click', 'button', function() {
         city = "orlando";
     displayEvents(city, null, true);
 });
+
+

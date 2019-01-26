@@ -18,10 +18,13 @@
 <body>
 
     <!-- ============= naviagation section  ============== -->
-    <!-- Articles, products [extracts, edibles, etc] , locator page, locator search bar -->
+    <!-- locator search bar -->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Eventscape</a>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+        <a class="navbar-brand" href="index.html">Eventscape</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -33,14 +36,18 @@
         </div>
     </nav>
 
+ 
+
     <!-- search Bar-->
+
     <div class="container-fluid but-fixed">
+    
         <div class="row justify-content-center" id="SearchBarDiv">
-            <div class="col-12 col-md-10 col-lg-8">
+            <div class="col-12 col-lg-8">
                 <form id="searchForm" class="card card-sm">
                     <div class="card-body row no-gutters align-items-center">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="cityInput" placeholder="Search topics or keywords...">
+                            <input type="text" class="form-control" id="cityInput" placeholder="Enter City">
                             <div class="input-group-append">
                                 <button id="searhEvent" type="submit" class="btn btn-primary">Search</button>
                             </div>
@@ -49,32 +56,75 @@
                 </form>
             </div>
         </div>
+
+
+        
         <div class="row justify-content-center">
             <div class="col-12">
-                <div id="events-container" class="card-deck justify-content-center">
-                    <!-- This is where all the gifs will be rendered -->
+                <div id="events-main">
+                    <div id="sorting-control" class="text-center">
+                        <input class="search form-control mb-2 ml-sm-1 mr-sm-1" placeholder="Search Events" />
+                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="name">Sort by Name</button>
+                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="date">Sort by Date</button>
+                        <button class="sort btn btn-outline-secondary mb-2 ml-1 mr-1 " data-sort="venue">Sort by Venue</button>
+                    </div>
+                    <div id="events-container" class="card-deck justify-content-center list">
+                        <!-- This is where all the gifs will be rendered -->
+                    </div>
                 </div>
             </div>
             <div id="show-more" class="col-lg-12 text-center mt-3">
                 <button class="start-btn btn btn-outline-light">Show More!</button>
             </div>
         </div>
+    
     </div>
+              <video autoplay loop id="myVideo" muted plays-inline>
+                    <source src="assets/videoBackground2.mp4" type="video/mp4">
+                  </video>
+    
+ 
 
 
-<!-- footer -->
+    <!-- footer -->
     <footer class="footer mt-auto py-3 text-center">
         <div class="container">
             <span class="text-muted">Presented by Jess, Louis, and Christian</span>
         </div>
     </footer>
 
-
-    <footer class="footer mt-auto py-3 text-center">
-        <div class="container">
-            <span class="text-muted">Presented by Jess, Louis, and Christian</span>
+    <!--Modal-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Welcome to Eventscape</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Fill out the below information to get started!</p>
+                    <form>
+                        <div class="form-group row">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">City</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="city" placeholder="Location">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <p id="error"></p>
+                    <button type="submit" class="btn btn-secondary" id="find-events">Find</button>
+                </div>
+            </div>
         </div>
-    </footer>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -83,14 +133,70 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+    <!--Firebase-->
+    <script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAe3aF_3HEoqxNqsYipJunwRyE9U12TkGI",
+            authDomain: "project1-5bbc7.firebaseapp.com",
+            databaseURL: "https://project1-5bbc7.firebaseio.com",
+            projectId: "project1-5bbc7",
+            storageBucket: "project1-5bbc7.appspot.com",
+            messagingSenderId: "383631456222"
+        };
+        firebase.initializeApp(config);
 
+        var database = firebase.database();
+        // adding email and city
+        $('#find-events').on('click', function (event) {
+            event.preventDefault();
+
+            //user input
+            var userEmail = $('#email').val().trim();
+            var userCity = $('#city').val().trim();
+
+            //database stuff
+            var newUser = {
+                userEmail: userEmail,
+                userCity: userCity
+            }
+
+            var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(userEmail)) {
+                $('#email').addClass('is-invalid');
+                var message = 'Please enter vaild email.'
+                $('#error').empty().append(message);
+                console.log(message);
+            }
+            else if (userCity == '' || userCity == ' ') {
+                $('#city').addClass('is-invalid');
+                var alert = 'Please enter valid city.'
+                $('#error').empty().append(alert);
+                console.log(alert)
+            }
+            else {
+                $('#email').removeClass('is-invalid');
+                $('#city').removeClass('is-invalid');
+                $('#myModal').modal('hide');
+                database.ref().push(newUser);
+                displayEvents(userCity, null, false);
+                localStorage.setItem('popupShown', 'true');
+            }
+        });
+    </script>
+    <script src="assets/javascript/list.min.js"></script>
     <script src="assets/javascript/app.js"></script>
+    <script>
+        if (!localStorage.getItem('popupShown')) {
+            // display popup
+            $('#myModal').modal('show', function () {
+                $('#myInput').trigger('focus');
+            });
+        };
+    </script>
 
-<!-- <a href="locater.html" class="venueButton">Venue Spot</a> -->
 
-
- <!-- <button type="button" class="btn venueButton">Venue Spot</button> -->
-    
 </body>
 
 </html>
