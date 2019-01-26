@@ -107,7 +107,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary" id="find-events" >Find</button>
+                    <button type="submit" class="btn btn-secondary" id="find-events">Find</button>
+                    <p id="error"></p>
                 </div>
             </div>
         </div>
@@ -149,14 +150,20 @@
                 userCity: userCity
             }
 
-            var x = $('#find-event').val();
+            var x = $('#email').val();
             var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!re.test(x)){
-                message = "Please enter vaild Email"
+            if (!re.test(x)) {
+                var message = 'please enter vaild email.'
                 console.log(message);
+            }
+
+            else if (city != '' || city != ' ') {
+                var alert = 'Please enter vaild city'
+                console.log(alert)
+
             } else {
                 $('#myModal').modal('hide');
-            };
+            }
 
             localStorage.setItem('popupShown', 'true');
 
