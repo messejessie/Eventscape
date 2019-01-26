@@ -11,7 +11,7 @@ body {
     text-rendering: optimizeLegibility;
     color: #444;
     background-color: #000;
-    background: linear-gradient(45deg, #23A6D5, #23D5AB); */
+    background: linear-gradient(45deg, #23A6D5, #23D5AB); 
     background-image: linear-gradient(to right top, #164ea2, #0081d1, #00aec3, #00d37f, #a8eb12);
     background-image: linear-gradient(45deg, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
     background-size: cover;
