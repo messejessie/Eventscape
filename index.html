@@ -101,7 +101,7 @@
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">City</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="city" placeholder="Location">
+                                <input type="email" class="form-control" id="city" placeholder="Location">
                             </div>
                         </div>
                     </form>
@@ -157,14 +157,18 @@
                 console.log(message);
             }
 
-            else if (city != '' || city != ' ') {
-                var alert = 'Please enter vaild city'
-                console.log(alert)
+           // else if (city != '' || city != ' ') {
+              //  var alert = 'Please enter vaild city'
+             //   console.log(alert)
 
-            } else {
+           // } 
+            else {
                 $('#myModal').modal('hide');
-            }
+                
 
+            }
+            displayEvents("orlando", null, false);
+            console.log(displayEvents)
             localStorage.setItem('popupShown', 'true');
 
         });
