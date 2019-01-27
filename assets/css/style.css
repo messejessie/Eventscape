@@ -20,6 +20,7 @@ body {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 100% !important;
+    position: relative;
 }
 
 .navbar-brand {
@@ -69,13 +70,13 @@ body {
 }
 /* video background */
 #myVideo {
-margin-top: -100px;
-position: absolute;
-  top: 0px;
-  left: 0px;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
+    margin-top: -100px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
 }
 /*------ Search box------*/
 #searhEvent  {
