@@ -1,24 +1,15 @@
-# Project1
+# Eventscape
 
 ## Focus
 
-*	Project Title: All 
-
+*	Project Title: Eventscape 
 *	Team Members: Christian, Jessie, Louis 
-
 *	Project Description: To find events around and about orlando
-
-*   Sketch of Final Product:
-
-*   APIs to be Used: Ticket Master, Google Maps
-
-*   Rough Breakdown of Tasks: User being able to search for event locations
-
+* Rough Breakdown of Tasks: User being able to search for local event and view location in a map
 * Target: Everyone 
 
-## API Keys: 
+## APIs 
 
-* Maps: https://developers.google.com/maps/documentation/javascript/examples/places-searchbox"
-
-* 
+* Google Maps
+* Ticket Master
 
